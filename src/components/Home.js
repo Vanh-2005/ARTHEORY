@@ -325,7 +325,6 @@ function Home() {
                                                     <div className="concept-tags mt-4">
                                                         <span className="tag">Metaverse Art</span>
                                                         <span className="tag">Virtual Reality</span>
-                                                        <span className="tag">Digital Landscapes</span>
                                                     </div>
                                                 </div>
                                             </div>
