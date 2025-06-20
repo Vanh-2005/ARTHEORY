@@ -1190,7 +1190,15 @@ function Home() {
                         </div>
                     </div>
                     <div className="map-section" data-aos="fade-up" data-aos-delay={200}>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.447679254714!2d106.6982865146226!3d10.776389392319893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f38b3d88b45%3A0x9e2a7d3a5f7b1b0!2sHo%20Chi%20Minh%20City%2C%20Vietnam!5e0!3m2!1sen!2s!4v1676961268712!5m2!1sen!2s" width="100%" height={500} style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+                        <iframe
+                            src="https://www.google.com/maps?q=Trường+Cao+đẳng+Lý+Thái+Tổ,+220+Nguyễn+Văn+Cừ,+Võ+Cường,+Bắc+Ninh&z=17&output=embed"
+                            width="100%"
+                            height={500}
+                            style={{ border: 0 }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        />
                     </div>
                     <div className="container form-container-overlap">
                         <div className="row justify-content-center" data-aos="fade-up" data-aos-delay={300}>
