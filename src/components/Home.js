@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 function Home() {
     useEffect(() => {
+        // --- Swiper, Isotope, các khởi tạo khác ---
         if (typeof window !== 'undefined') {
             // Config cho showcase slider (1 slide)
             const showcaseSlider = document.querySelector('#showcase .init-swiper');
@@ -90,29 +91,36 @@ function Home() {
                 });
             }
         }
-        // ...existing code...
+        // Nút scroll-top
+        const handleScroll = () => {
+            const btn = document.getElementById('scrollTopBtn');
+            if (btn) {
+                if (window.scrollY > 300) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
 
-        // Xử lý FAQ 
-        // Thay thế phần xử lý FAQ hiện tại bằng đoạn code sau trong useEffect
+        // ...các event khác...
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            // ...cleanup khác...
+        };
+
+        // FAQ event
         const handleFaqClick = (event) => {
             const item = event.currentTarget;
             const content = item.querySelector('.faq-content');
             const toggle = item.querySelector('.faq-toggle');
-
-            // Toggle active state
             item.classList.toggle('faq-active');
             toggle.classList.toggle('active');
-
-            // Toggle content height
             if (item.classList.contains('faq-active')) {
                 content.style.display = 'block';
-                content.style.maxHeight = 'none';
-
-                const actualHeight = content.scrollHeight;
-
-                requestAnimationFrame(() => {
-                    content.style.maxHeight = actualHeight + "px";
-                });
+                content.style.maxHeight = content.scrollHeight + "px";
             } else {
                 content.style.maxHeight = "0px";
                 content.addEventListener('transitionend', function handler() {
@@ -124,39 +132,19 @@ function Home() {
             }
         };
 
-        // Thêm event listeners cho FAQ items
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             item.addEventListener('click', handleFaqClick);
         });
 
-        // Cleanup function
+        // Cleanup duy nhất
         return () => {
-            const faqItems = document.querySelectorAll('.faq-item');
+            window.removeEventListener('scroll', handleScroll);
             faqItems.forEach(item => {
                 item.removeEventListener('click', handleFaqClick);
             });
+            // ...cleanup isotope, swiper nếu cần...
         };
-
-        // Khởi tạo Isotope cho portfolio
-        if (typeof window !== 'undefined' && window.Isotope) {
-            const iso = new window.Isotope('.isotope-container', {
-                itemSelector: '.isotope-item',
-                layoutMode: 'masonry'
-            });
-
-            // Xử lý filter portfolio
-            const filterBtns = document.querySelectorAll('.portfolio-filters li');
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const filterValue = btn.getAttribute('data-filter');
-                    iso.arrange({ filter: filterValue });
-                    filterBtns.forEach(el => el.classList.remove('filter-active'));
-                    btn.classList.add('filter-active');
-                });
-            });
-        }
-
     }, []);
 
     // Empty dependency array means this runs once on mount
@@ -172,7 +160,9 @@ function Home() {
                                         <h5>NGHỆ THUẬT THỊ GIÁC</h5>
                                     </div>
                                     <div className="main-heading">
-                                        <h1>SÁNG TẠO<br />KHÔNG GIỚI HẠN</h1>
+                                        <div className="main-heading">
+                                            <h1 className="gradient-text">SÁNG TẠO<br />KHÔNG GIỚI HẠN</h1>
+                                        </div>
                                     </div>
                                     <div className="divider" />
                                     <div className="description">
@@ -212,7 +202,9 @@ function Home() {
                 <section id="about" className="about section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Giới thiệu</h2>
-                        <div><span>Khám phá</span> <span className="description-title">Về DIGITALART</span></div>
+                        <div>
+                            <span className="gradient-text">Khám phá</span> <span className="description-title gradient-text">Về DIGITALART</span>
+                        </div>
                     </div>
                     <div className="container">
                         <div className="row gx-5 align-items-center">
@@ -227,7 +219,7 @@ function Home() {
                             </div>
                             <div className="col-lg-6 mt-4 mt-lg-0" data-aos="fade-left" data-aos-delay={300}>
                                 <div className="about-content">
-                                    <h2>TRANH KỸ THUẬT SỐ LÀ GÌ</h2>
+                                    <h2 className="gradient-text">TRANH KỸ THUẬT SỐ LÀ GÌ</h2>
                                     <p className="lead">
                                         Tranh kỹ thuật số (Digital Art) là hình thức nghệ thuật sử dụng công nghệ số và phần mềm chuyên dụng để sáng tạo.
                                         Khác với hội họa truyền thống, nghệ sĩ số vẽ trực tiếp trên máy tính hoặc tablet với các công cụ như bút vẽ điện tử,
@@ -257,7 +249,7 @@ function Home() {
                             <div className="row">
                                 <div className="col-lg-4" data-aos="fade-right" data-aos-delay={200}>
                                     <div className="testimonial-intro">
-                                        <h3>Khơi Dậy Sáng Tạo</h3>
+                                        <h3 className="gradient-text">Khơi Dậy Sáng Tạo</h3>
                                         <p>Khám phá các ý tưởng nghệ thuật số độc đáo, từ những thế giới viễn tưởng đầy mê hoặc đến những khung
                                             cảnh hiện đại sống động, được tạo nên bởi vô vàn ý tưởng.</p>
                                         <div className="swiper-nav-buttons mt-4">
@@ -346,8 +338,8 @@ function Home() {
                                 <div className="col-lg-8 col-md-12">
                                     <div className="service-intro">
                                         <h2 className="service-heading">
-                                            <div>Kiến tạo</div>
-                                            <div><span>Nghệ thuật chuyên nghiệp</span></div>
+                                            <div className="gradient-text">Kiến tạo</div>
+                                            <span className="gradient-text">Nghệ thuật chuyên nghiệp</span>
                                         </h2>
                                     </div>
                                 </div>
@@ -472,7 +464,9 @@ function Home() {
                 <section id="steps" className="steps section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Các Giai Đoạn Sáng Tạo</h2>
-                        <div><span>Hành trình</span> <span className="description-title">Tạo nên nghệ thuật số</span></div>
+                        <div>
+                            <span className="gradient-text">Hành trình</span> <span className="description-title gradient-text">Tạo nên nghệ thuật số</span>
+                        </div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="steps-wrapper">
@@ -535,8 +529,8 @@ function Home() {
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="advertise-1 d-flex flex-column flex-lg-row gap-4 align-items-center position-relative">
                             <div className="content-left flex-grow-1" data-aos="fade-right" data-aos-delay={200}>
-                                <span className="badge text-uppercase mb-2">Khám Phá Ngay!</span>
-                                <h2>Sáng Tạo Không Giới Hạn</h2>
+
+                                <h2 className="gradient-text">Sáng Tạo Không Giới Hạn</h2>
                                 <p className="my-4">
                                     Khám phá thế giới nghệ thuật số đa dạng từ digital painting, concept art đến character design
                                     và matte painting. Trang web này là không gian trưng bày trực tuyến với những tác phẩm
@@ -583,7 +577,10 @@ function Home() {
                 <section id="showcase" className="testimonials section light-background">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Ấn Phẩm Tiêu Biểu</h2>
-                        <div><span>Khám phá</span> <span className="description-title">Nghệ thuật số nổi bật</span></div>
+                        <div>
+                            <span className="gradient-text">Chiêm Ngưỡng</span>{' '}
+                            <span className="description-title gradient-text">Nghệ thuật số nổi bật</span>
+                        </div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="testimonials-slider swiper init-swiper">
@@ -674,7 +671,7 @@ function Home() {
                 <section id="portfolio" className="portfolio section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Tác Phẩm</h2>
-                        <div><span>Bộ sưu tập</span> <span className="description-title">nghệ thuật</span></div>
+                        <div><span className="gradient-text">Bộ sưu tập</span> <span className="description-title gradient-text">nghệ thuật</span></div>
                     </div>
                     <div className="container-fluid" data-aos="fade-up" data-aos-delay={100}>
                         <div className="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
@@ -871,7 +868,7 @@ function Home() {
                 <section id="tools" className="team section light-background">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Công Cụ Sáng Tạo</h2>
-                        <div><span>Các</span> <span className="description-title">Phần mềm tạo nên nghệ thuật số</span></div>
+                        <div><span className="gradient-text">Các</span> <span className="description-title gradient-text">Phần mềm tạo nên nghệ thuật số</span></div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="row gy-4">
@@ -976,7 +973,7 @@ function Home() {
                 <section id="pricing" className="pricing section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Cấp Độ Thành Thạo Nghệ Thuật</h2>
-                        <div><span>Từ cơ bản</span> <span className="description-title">đến chuyên nghiệp</span></div>
+                        <div><span className="gradient-text">Từ cơ bản</span> <span className="description-title gradient-text">đến chuyên nghiệp</span></div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="row gy-4">
@@ -986,7 +983,7 @@ function Home() {
                                         <div className="plan-icon">
                                             <i className="bi bi-brush" />
                                         </div>
-                                        <h3>Cơ Bản</h3>
+                                        <h3 className="gradient-text">Cơ Bản</h3>
                                         <p>Tác phẩm nghệ thuật số đơn giản</p>
                                     </div>
                                     <div className="plan-pricing">
@@ -1017,7 +1014,7 @@ function Home() {
                                         <div className="plan-icon">
                                             <i className="bi bi-palette" />
                                         </div>
-                                        <h3>Nâng Cao</h3>
+                                        <h3 className="gradient-text">Nâng Cao</h3>
                                         <p>Tác phẩm với độ chi tiết và sáng tạo cao hơn</p>
                                     </div>
                                     <div className="plan-pricing">
@@ -1047,7 +1044,7 @@ function Home() {
                                         <div className="plan-icon">
                                             <i className="bi bi-star" />
                                         </div>
-                                        <h3>Chuyên Nghiệp</h3>
+                                        <h3 className="gradient-text">Chuyên Nghiệp</h3>
                                         <p>Tác phẩm nghệ thuật số đỉnh cao cho dự án</p>
                                     </div>
                                     <div className="plan-pricing">
@@ -1078,7 +1075,7 @@ function Home() {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-5" data-aos="fade-up">
-                                <h2 className="faq-title">Vấn Đề Thường Gặp</h2>
+                                <h2 className="faq-title gradient-text">Vấn Đề Thường Gặp</h2>
                                 <p className="faq-description">Tổng hợp các vấn đề phổ biến trong quá trình sáng tạo nghệ thuật số và cách khắc
                                     phục hiệu quả.</p>
                                 {/* Keep original SVG arrow */}
@@ -1091,52 +1088,112 @@ function Home() {
                             </div>
                             <div className="col-lg-7" data-aos="fade-up" data-aos-delay={300}>
                                 <div className="faq-container">
-                                    <div className="faq-item faq-active">
-                                        <h3>Làm thế nào để khắc phục vấn đề về màu sắc trong digital painting?</h3>
+                                    {/* 1 */}
+                                    <div className="faq-item">
+                                        <h3
+                                            onClick={e => {
+                                                e.currentTarget.parentElement.classList.toggle('faq-active');
+                                            }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Làm thế nào để khắc phục vấn đề về màu sắc trong digital painting?
+                                        </h3>
                                         <div className="faq-content">
-                                            <p>Để cải thiện màu sắc, hãy nghiên cứu color theory, sử dụng color picker thông minh, và làm việc với
+                                            <p>
+                                                Để cải thiện màu sắc, hãy nghiên cứu color theory, sử dụng color picker thông minh, và làm việc với
                                                 color palette có sẵn. Điều chỉnh các thông số như Hue/Saturation và làm việc trên nhiều layer để dễ
-                                                dàng chỉnh sửa.</p>
+                                                dàng chỉnh sửa.
+                                            </p>
                                         </div>
                                         <i className="faq-toggle bi bi-chevron-right" />
                                     </div>
+                                    {/* 2 */}
                                     <div className="faq-item">
-                                        <h3>Làm sao để tạo texture tự nhiên trong tranh kỹ thuật số?</h3>
+                                        <h3
+                                            onClick={e => {
+                                                e.currentTarget.parentElement.classList.toggle('faq-active');
+                                            }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Làm sao để tạo texture tự nhiên trong tranh kỹ thuật số?
+                                        </h3>
                                         <div className="faq-content">
-                                            <p>Kết hợp sử dụng các brush có texture, áp dụng layer modes khác nhau, và thêm noise một cách có chọn
-                                                lọc. Việc này giúp tác phẩm có độ chân thực và đặc tính vật liệu rõ ràng hơn.</p>
+                                            <p>
+                                                Kết hợp sử dụng các brush có texture, áp dụng layer modes khác nhau, và thêm noise một cách có chọn
+                                                lọc. Việc này giúp tác phẩm có độ chân thực và đặc tính vật liệu rõ ràng hơn.
+                                            </p>
                                         </div>
                                         <i className="faq-toggle bi bi-chevron-right" />
                                     </div>
+                                    {/* 3 */}
                                     <div className="faq-item">
-                                        <h3>Cách xử lý vấn đề về tỷ lệ và góc nhìn phối cảnh?</h3>
+                                        <h3
+                                            onClick={e => {
+                                                e.currentTarget.parentElement.classList.toggle('faq-active');
+                                            }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Cách xử lý vấn đề về tỷ lệ và góc nhìn phối cảnh?
+                                        </h3>
                                         <div className="faq-content">
-                                            <p>Sử dụng công cụ perspective grid, tham khảo ảnh tham chiếu, và thực hành vẽ từ nhiều góc nhìn khác
-                                                nhau. Đặc biệt chú ý đến vanishing points và horizon line.</p>
+                                            <p>
+                                                Sử dụng công cụ perspective grid, tham khảo ảnh tham chiếu, và thực hành vẽ từ nhiều góc nhìn khác
+                                                nhau. Đặc biệt chú ý đến vanishing points và horizon line.
+                                            </p>
                                         </div>
                                         <i className="faq-toggle bi bi-chevron-right" />
                                     </div>
+                                    {/* 4 */}
                                     <div className="faq-item">
-                                        <h3>Làm thế nào để tạo hiệu ứng ánh sáng chân thực?</h3>
+                                        <h3
+                                            onClick={e => {
+                                                e.currentTarget.parentElement.classList.toggle('faq-active');
+                                            }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Làm thế nào để tạo hiệu ứng ánh sáng chân thực?
+                                        </h3>
                                         <div className="faq-content">
-                                            <p>Nghiên cứu về nguồn sáng, sử dụng các layer blend mode như Overlay hoặc Soft Light, và tạo độ tương
-                                                phản thích hợp. Chú ý đến ambient light và reflected light.</p>
+                                            <p>
+                                                Nghiên cứu về nguồn sáng, sử dụng các layer blend mode như Overlay hoặc Soft Light, và tạo độ tương
+                                                phản thích hợp. Chú ý đến ambient light và reflected light.
+                                            </p>
                                         </div>
                                         <i className="faq-toggle bi bi-chevron-right" />
                                     </div>
+                                    {/* 5 */}
                                     <div className="faq-item">
-                                        <h3>Cách khắc phục hiện tượng pixelated trong tranh số?</h3>
+                                        <h3
+                                            onClick={e => {
+                                                e.currentTarget.parentElement.classList.toggle('faq-active');
+                                            }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Cách khắc phục hiện tượng pixelated trong tranh số?
+                                        </h3>
                                         <div className="faq-content">
-                                            <p>Làm việc với canvas kích thước lớn (300 DPI trở lên), sử dụng công cụ vector khi cần thiết, và áp
-                                                dụng các kỹ thuật anti-aliasing phù hợp.</p>
+                                            <p>
+                                                Làm việc với canvas kích thước lớn (300 DPI trở lên), sử dụng công cụ vector khi cần thiết, và áp
+                                                dụng các kỹ thuật anti-aliasing phù hợp.
+                                            </p>
                                         </div>
                                         <i className="faq-toggle bi bi-chevron-right" />
                                     </div>
+                                    {/* 6 */}
                                     <div className="faq-item">
-                                        <h3>Giải quyết vấn đề về độ mượt của nét vẽ?</h3>
+                                        <h3
+                                            onClick={e => {
+                                                e.currentTarget.parentElement.classList.toggle('faq-active');
+                                            }}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Giải quyết vấn đề về độ mượt của nét vẽ?
+                                        </h3>
                                         <div className="faq-content">
-                                            <p>Điều chỉnh stabilizer trong brush settings, sử dụng tablet với độ nhạy phù hợp, và thực hành các
-                                                bài tập về stroke control thường xuyên.</p>
+                                            <p>
+                                                Điều chỉnh stabilizer trong brush settings, sử dụng tablet với độ nhạy phù hợp, và thực hành các
+                                                bài tập về stroke control thường xuyên.
+                                            </p>
                                         </div>
                                         <i className="faq-toggle bi bi-chevron-right" />
                                     </div>
@@ -1148,7 +1205,7 @@ function Home() {
                 <section id="contact" className="contact section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Liên Hệ</h2>
-                        <div><span>Kết nối</span> <span className="description-title">Để sáng tạo</span></div>
+                        <div><span className="gradient-text">Kết nối</span> <span className="description-title gradient-text">Để sáng tạo</span></div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="row gy-4 mb-5">
@@ -1255,10 +1312,18 @@ function Home() {
                     </div>
                 </section>
             </main>
-
+            {/* Nút cuộn lên đầu trang */}
+            <button
+                className="scroll-top"
+                id="scrollTopBtn"
+                aria-label="Cuộn lên đầu trang"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+                <i className="bi bi-arrow-up"></i>
+            </button>
 
         </>
     );
 
 }
-export default Home;  
+export default Home;

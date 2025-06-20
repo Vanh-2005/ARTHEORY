@@ -188,12 +188,16 @@ h6 {
 }
 
 @media (max-width: 1200px) {
+
   /* Sửa lại mobile-nav-toggle */
   .mobile-nav-toggle {
-    position: relative !important; /* Thay đổi từ fixed thành relative */
-    margin-left: auto; /* Đẩy nút về phía bên phải */
+    position: relative !important;
+    /* Thay đổi từ fixed thành relative */
+    margin-left: auto;
+    /* Đẩy nút về phía bên phải */
     margin-right: 0;
-    order: 3; /* Đặt thứ tự hiển thị */
+    order: 3;
+    /* Đặt thứ tự hiển thị */
   }
 
   /* Điều chỉnh lại container */
@@ -206,19 +210,23 @@ h6 {
 
   /* Đảm bảo logo không bị che */
   .header .logo {
-    order: 1; /* Logo hiển thị đầu tiên */
-    margin-right: auto; /* Đẩy logo về bên trái */
+    order: 1;
+    /* Logo hiển thị đầu tiên */
+    margin-right: auto;
+    /* Đẩy logo về bên trái */
   }
 
   /* Điều chỉnh nút Get Started */
   .header .btn-getstarted {
-    order: 2; /* Nút Get Started ở giữa */
+    order: 2;
+    /* Nút Get Started ở giữa */
     margin: 0 15px;
   }
 
   /* Điều chỉnh menu khi active */
   .mobile-nav-toggle.bi-x {
-    position: fixed !important; /* Giữ nút X cố định khi menu mở */
+    position: fixed !important;
+    /* Giữ nút X cố định khi menu mở */
     right: 20px;
     top: 20px;
   }
@@ -227,24 +235,28 @@ h6 {
 /* Progress Bar */
 .scroll-progress {
   position: fixed !important;
-  top: 0 !important; /* Thay đổi từ bottom thành top */
+  top: 0 !important;
   left: 0;
   width: 100%;
   height: 3px;
-  background-color: var(--accent-color);
-  z-index: 9999 !important; /* Đảm bảo hiển thị trên cùng */
+  /* Gradient màu giống gradient-text */
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  z-index: 9999 !important;
   transition: width 0.3s ease;
 }
 
+
 /* Điều chỉnh lại header để không che progress bar */
 .header {
-  margin-top: 3px; /* Tạo khoảng cách cho progress bar */
+  margin-top: 3px;
+  /* Tạo khoảng cách cho progress bar */
 }
 
 /* Thêm media query cho màn hình nhỏ hơn */
 @media (max-width: 576px) {
   .header .logo h1 {
-    font-size: 18px; /* Giảm kích thước chữ logo trên mobile */
+    font-size: 18px;
+    /* Giảm kích thước chữ logo trên mobile */
   }
 
   .header .btn-getstarted {
@@ -491,17 +503,18 @@ h6 {
     font-size: 14px;
   }
 
-  .navmenu .dropdown > a:after {
+  .navmenu .dropdown>a:after {
     content: "\f107";
     font-family: "Bootstrap-icons";
     margin-left: 10px;
     transition: transform 0.2s ease-in-out;
   }
 
-  .navmenu .dropdown .dropdown-active > a:after {
+  .navmenu .dropdown .dropdown-active>a:after {
     transform: rotate(180deg);
   }
 }
+
 .header {
   transition: none !important;
   transform: none !important;
@@ -641,7 +654,8 @@ h6 {
 
 #preloader:before {
   content: "";
-  position: absolute; /* Đổi từ fixed sang absolute */
+  position: absolute;
+  /* Đổi từ fixed sang absolute */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -667,35 +681,50 @@ h6 {
 /*--------------------------------------------------------------
 # Scroll Top Button
 --------------------------------------------------------------*/
+/* Nút scroll-top đẹp hơn */
 .scroll-top {
   position: fixed;
-  visibility: hidden;
-  opacity: 0;
-  right: 15px;
-  bottom: -15px;
+  right: 24px;
+  bottom: -24px;
   z-index: 99999;
-  background-color: var(--accent-color);
-  width: 44px;
-  height: 44px;
-  border-radius: 50px;
-  transition: all 0.4s;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  box-shadow: 0 6px 24px 0 rgba(228, 60, 92, 0.18), 0 1.5px 8px 0 rgba(0, 0, 0, 0.12);
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+  cursor: pointer;
 }
 
 .scroll-top i {
-  font-size: 24px;
-  color: var(--contrast-color);
-  line-height: 0;
-}
-
-.scroll-top:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
-  color: var(--contrast-color);
+  font-size: 28px;
+  color: #fff;
+  transition: transform 0.22s cubic-bezier(.4, 0, .2, 1), text-shadow 0.22s;
+  text-shadow: 0 2px 8px rgba(228, 60, 92, 0.18);
 }
 
 .scroll-top.active {
-  visibility: visible;
   opacity: 1;
-  bottom: 15px;
+  visibility: visible;
+  bottom: 24px;
+}
+
+.scroll-top:hover {
+  background: linear-gradient(135deg, #ffb199 10%, var(--accent-color) 90%);
+  box-shadow: 0 10px 32px 0 rgba(228, 60, 92, 0.28), 0 2px 12px 0 rgba(0, 0, 0, 0.18);
+  transform: scale(1.08) translateY(-4px);
+}
+
+.scroll-top:hover i {
+  transform: translateY(-2px) scale(1.12);
+  text-shadow: 0 0 16px #fff, 0 0 24px var(--accent-color);
 }
 
 /*--------------------------------------------------------------
@@ -2466,6 +2495,7 @@ section,
 
 .pricing .plan-features ul li {
   padding: 12px 0;
+
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -3880,13 +3910,14 @@ body.mobile-nav-active {
 
 /* Thêm vào main.css */
 .testimonial-item h4:hover {
-  color: var(--accent-color) !important; /* Sử dụng màu accent (đỏ) */
+  color: var(--accent-color) !important;
+  /* Sử dụng màu accent (đỏ) */
   transition: color 0.3s ease;
   cursor: pointer;
 }
 
 /* Cho tiêu đề trong testimonial-section */
-.testimonial-item .inspiration-icon + h4:hover {
+.testimonial-item .inspiration-icon+h4:hover {
   color: var(--accent-color) !important;
   transition: color 0.3s ease;
   cursor: pointer;
@@ -3905,11 +3936,12 @@ body.mobile-nav-active {
     color: var(--accent-color) !important;
   }
 }
+
 /* Hiệu ứng phát sáng và phóng to cho nút "Khám phá ngay" khi hover và active */
 /* Hiệu ứng phóng to nhẹ cho nút "Khám phá ngay" khi hover và active, bỏ phát sáng quanh viền */
 .header .btn-getstarted {
   transition:
-    transform 0.18s cubic-bezier(.4,0,.2,1);
+    transform 0.18s cubic-bezier(.4, 0, .2, 1);
 }
 
 .header .btn-getstarted:hover,
@@ -3923,26 +3955,41 @@ body.mobile-nav-active {
 .header .btn-getstarted:active {
   animation: btn-glow-press 0.18s;
 }
+
 @keyframes btn-glow-press {
-  0% { transform: scale(1.12) translateY(0); }
-  30% { transform: scale(1.09) translateY(1px); }
-  60% { transform: scale(1.13) translateY(-1px);}
-  100% { transform: scale(1.12) translateY(0);}
+  0% {
+    transform: scale(1.12) translateY(0);
+  }
+
+  30% {
+    transform: scale(1.09) translateY(1px);
+  }
+
+  60% {
+    transform: scale(1.13) translateY(-1px);
+  }
+
+  100% {
+    transform: scale(1.12) translateY(0);
+  }
 }
+
 .header .header-container {
-  background: rgba(27, 38, 44, 0.35); /* Màu nền trong suốt nhẹ */
+  background: rgba(27, 38, 44, 0.35);
+  /* Màu nền trong suốt nhẹ */
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   border-radius: 50px;
   padding: 5px 25px 5px 30px;
-  box-shadow: 0px 2px 15px rgba(0,0,0,0.08);
-  transition: background 0.4s cubic-bezier(.4,0,.2,1), backdrop-filter 0.4s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+  transition: background 0.4s cubic-bezier(.4, 0, .2, 1), backdrop-filter 0.4s cubic-bezier(.4, 0, .2, 1);
 }
+
 /* Hiệu ứng underline động và phóng to nhẹ cho menu chính khi hover/lướt qua */
 .navmenu a {
   position: relative;
   overflow: hidden;
-  transition: color 0.25s cubic-bezier(.4,0,.2,1), transform 0.18s cubic-bezier(.4,0,.2,1);
+  transition: color 0.25s cubic-bezier(.4, 0, .2, 1), transform 0.18s cubic-bezier(.4, 0, .2, 1);
 }
 
 .navmenu a::after {
@@ -3956,7 +4003,7 @@ body.mobile-nav-active {
   border-radius: 2px;
   opacity: 0;
   transform: scaleX(0.6);
-  transition: all 0.25s cubic-bezier(.4,0,.2,1);
+  transition: all 0.25s cubic-bezier(.4, 0, .2, 1);
   pointer-events: none;
 }
 
@@ -3982,6 +4029,7 @@ body.mobile-nav-active {
   letter-spacing: 0.5px;
   transform: scale(1.10);
 }
+
 /* Hiệu ứng ripple cho menu chính */
 .navmenu a {
   position: relative;
@@ -3991,14 +4039,17 @@ body.mobile-nav-active {
 .navmenu a:active::before {
   content: "";
   position: absolute;
-  left: 50%; top: 50%;
-  width: 0; height: 0;
-  background: rgba(228,60,92,0.15);
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(228, 60, 92, 0.15);
   border-radius: 100%;
   transform: translate(-50%, -50%);
   animation: ripple-effect 0.5s linear;
   z-index: 0;
 }
+
 @keyframes ripple-effect {
   to {
     width: 200%;
@@ -4006,6 +4057,7 @@ body.mobile-nav-active {
     opacity: 0;
   }
 }
+
 /* 1. Hiệu ứng glow nhẹ cho tiêu đề section khi hover */
 .section-title h2:hover {
   color: var(--accent-color);
@@ -4016,8 +4068,9 @@ body.mobile-nav-active {
 
 /* 2. Hiệu ứng scale và shadow cho card dịch vụ khi hover */
 .service-card {
-  transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.25s cubic-bezier(.4, 0, .2, 1), box-shadow 0.25s cubic-bezier(.4, 0, .2, 1);
 }
+
 .service-card:hover {
   transform: translateY(-8px) scale(1.03);
   box-shadow: 0 8px 32px 0 color-mix(in srgb, var(--accent-color), transparent 90%);
@@ -4028,31 +4081,49 @@ body.mobile-nav-active {
 .service-card:hover .service-icon i {
   animation: icon-bounce 0.5s;
 }
+
 @keyframes icon-bounce {
-  0% { transform: scale(1);}
-  30% { transform: scale(1.25) rotate(-8deg);}
-  60% { transform: scale(0.95) rotate(8deg);}
-  100% { transform: scale(1);}
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.25) rotate(-8deg);
+  }
+
+  60% {
+    transform: scale(0.95) rotate(8deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* 4. Hiệu ứng ripple cho nút chính (btn, btn-primary, btn-outline) */
-.btn, .btn-primary, .btn-outline {
+.btn,
+.btn-primary,
+.btn-outline {
   position: relative;
   overflow: hidden;
 }
+
 .btn:active::before,
 .btn-primary:active::before,
 .btn-outline:active::before {
   content: "";
   position: absolute;
-  left: 50%; top: 50%;
-  width: 0; height: 0;
-  background: rgba(228,60,92,0.13);
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(228, 60, 92, 0.13);
   border-radius: 100%;
   transform: translate(-50%, -50%);
   animation: ripple-effect 0.5s linear;
   z-index: 0;
 }
+
 @keyframes ripple-effect {
   to {
     width: 220%;
@@ -4075,6 +4146,7 @@ body.mobile-nav-active {
   box-shadow: 0 0 0 transparent;
   transition: box-shadow 0.25s, background 0.25s;
 }
+
 .concept-tags .tag:hover {
   background: var(--accent-color);
   color: var(--contrast-color);
@@ -4083,8 +4155,9 @@ body.mobile-nav-active {
 
 /* 6. Hiệu ứng scale và shadow cho portfolio-entry khi hover */
 .portfolio-entry {
-  transition: transform 0.25s cubic-bezier(.4,0,.2,1), box-shadow 0.25s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.25s cubic-bezier(.4, 0, .2, 1), box-shadow 0.25s cubic-bezier(.4, 0, .2, 1);
 }
+
 .portfolio-entry:hover {
   transform: translateY(-6px) scale(1.025);
   box-shadow: 0 8px 32px 0 color-mix(in srgb, var(--accent-color), transparent 90%);
@@ -4101,10 +4174,12 @@ body.mobile-nav-active {
   border-radius: 2rem;
   /* Không còn hiệu ứng glow hay nhấp nháy */
 }
+
 /* 8. Hiệu ứng hover cho .feature-item trong call-to-action */
 .call-to-action .feature-item {
-  transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.22s cubic-bezier(.4, 0, .2, 1), box-shadow 0.22s cubic-bezier(.4, 0, .2, 1);
 }
+
 .call-to-action .feature-item:hover {
   transform: scale(1.06) translateY(-2px);
   box-shadow: 0 4px 18px 0 color-mix(in srgb, var(--accent-color), transparent 90%);
@@ -4112,8 +4187,9 @@ body.mobile-nav-active {
 
 /* 9. Hiệu ứng glow cho .stats-card trong hero */
 .hero .stats-card {
-  transition: box-shadow 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1);
+  transition: box-shadow 0.25s cubic-bezier(.4, 0, .2, 1), transform 0.25s cubic-bezier(.4, 0, .2, 1);
 }
+
 .hero .stats-card:hover {
   box-shadow: 0 0 24px 0 color-mix(in srgb, var(--accent-color), transparent 80%);
   transform: scale(1.04) translateY(-4px);
@@ -4121,19 +4197,22 @@ body.mobile-nav-active {
 
 /* 10. Hiệu ứng cho .team-member khi hover */
 .team-member {
-  transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1);
+  transition: box-shadow 0.22s cubic-bezier(.4, 0, .2, 1), transform 0.22s cubic-bezier(.4, 0, .2, 1);
 }
+
 .team-member:hover {
   box-shadow: 0 8px 32px 0 color-mix(in srgb, var(--accent-color), transparent 90%);
   transform: scale(1.025) translateY(-4px);
   z-index: 2;
 }
+
 /* Hiệu ứng fade-in cho các section khi cuộn vào view (kết hợp AOS hoặc tự động) */
 .section[data-aos] {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+  transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.7s cubic-bezier(.4, 0, .2, 1);
 }
+
 .section[data-aos].aos-animate {
   opacity: 1;
   transform: none;
@@ -4143,7 +4222,7 @@ body.mobile-nav-active {
 .portfolio-entry .entry-image img:hover {
   filter: brightness(1.08) saturate(1.2) contrast(1.05);
   transform: scale(1.07) rotate(-1deg);
-  transition: all 0.4s cubic-bezier(.4,0,.2,1);
+  transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
 }
 
 /* Hiệu ứng glow cho artwork-info trong showcase */
@@ -4161,6 +4240,7 @@ body.mobile-nav-active {
   box-shadow: 0 0 0 transparent;
   transition: box-shadow 0.22s, background 0.22s;
 }
+
 .artwork-info .technique:hover,
 .artwork-info .resolution:hover,
 .artwork-info .software:hover {
@@ -4171,8 +4251,9 @@ body.mobile-nav-active {
 
 /* Hiệu ứng icon động cho .feature-item trong call-to-action */
 .call-to-action .feature-item i {
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.3s cubic-bezier(.4, 0, .2, 1);
 }
+
 .call-to-action .feature-item:hover i {
   transform: scale(1.18) rotate(-10deg);
 }
@@ -4181,8 +4262,9 @@ body.mobile-nav-active {
 
 /* Hiệu ứng scale và shadow cho .faq-item khi hover */
 .faq-item {
-  transition: box-shadow 0.22s cubic-bezier(.4,0,.2,1), transform 0.22s cubic-bezier(.4,0,.2,1);
+  transition: box-shadow 0.22s cubic-bezier(.4, 0, .2, 1), transform 0.22s cubic-bezier(.4, 0, .2, 1);
 }
+
 .faq-item:hover {
   box-shadow: 0 4px 18px 0 color-mix(in srgb, var(--accent-color), transparent 90%);
   transform: scale(1.02) translateY(-2px);
@@ -4196,6 +4278,7 @@ body.mobile-nav-active {
   box-shadow: 0 0 18px 0 color-mix(in srgb, var(--accent-color), transparent 80%);
   transition: background 0.22s, box-shadow 0.22s;
 }
+
 .pricing-card:hover .plan-header .plan-icon i {
   color: var(--contrast-color);
 }
@@ -4205,25 +4288,209 @@ body.mobile-nav-active {
   text-shadow: 0 0 12px color-mix(in srgb, var(--accent-color), transparent 70%);
   animation: stats-glow 2.5s infinite alternate;
 }
+
 @keyframes stats-glow {
-  0% { text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color), transparent 80%);}
-  100% { text-shadow: 0 0 24px color-mix(in srgb, var(--accent-color), transparent 60%);}
+  0% {
+    text-shadow: 0 0 8px color-mix(in srgb, var(--accent-color), transparent 80%);
+  }
+
+  100% {
+    text-shadow: 0 0 24px color-mix(in srgb, var(--accent-color), transparent 60%);
+  }
 }
 
 /* Hiệu ứng cho .team-member icon khi hover */
 .team-member .social a i {
-  transition: transform 0.22s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.22s cubic-bezier(.4, 0, .2, 1);
 }
+
 .team-member .social a:hover i {
   transform: scale(1.18) rotate(-10deg);
 }
+
 .header .logo h1:hover {
   transform: scale(1.10);
-  transition: transform 0.18s cubic-bezier(.4,0,.2,1), text-shadow 0.18s cubic-bezier(.4,0,.2,1);
+  transition: transform 0.18s cubic-bezier(.4, 0, .2, 1), text-shadow 0.18s cubic-bezier(.4, 0, .2, 1);
   cursor: pointer;
   text-shadow: 0 0 8px #fff, 0 0 16px var(--accent-color);
 }
+
 .header .logo h1:active {
   transform: scale(1.10);
   text-shadow: 0 0 8px #fff, 0 0 16px var(--accent-color);
 }
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.navmenu a:hover,
+.navmenu a:focus,
+.navmenu a.active {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  transition: color 0.25s, background 0.25s;
+}
+
+.services .service-card h3:hover,
+.services .service-card h3:focus {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  cursor: pointer;
+  transition: color 0.25s, background 0.25s;
+}
+
+/* Thêm vào file CSS của bạn */
+
+/* Đảm bảo các span nằm cùng dòng */
+.section-title>div {
+  white-space: nowrap;
+}
+
+/* Hiệu ứng gradient khi hover vào tên phần mềm */
+.team-member h4 {
+  transition: background 0.4s, color 0.4s;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+/* ...existing code... */
+.team-member:hover h4 {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.pricing-card:hover .plan-pricing .amount {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+
+
+.pricing-card:hover .plan-cta .btn-plan,
+.pricing-card.popular:hover .plan-cta .btn-plan {
+  background: color-mix(in srgb, var(--default-color), transparent 85%);
+  border: 2px solid var(--accent-color);
+  background-image: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  box-shadow: 0 0 12px 0 color-mix(in srgb, var(--accent-color), transparent 70%);
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+.pricing-card.popular .plan-cta .btn-plan {
+  background-color: color-mix(in srgb, var(--default-color), transparent 95%);
+  color: var(--default-color);
+  border: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+.contact-info-box .info-content h4,
+.contact-info-box .info-content p {
+  transition: background 0.4s, color 0.4s;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+  background-clip: unset;
+  color: inherit;
+}
+
+.contact-info-box:hover .info-content h4,
+.contact-info-box:hover .info-content p {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ...existing code... */
+
+/* Xóa hiệu ứng phát sáng (text-shadow) khi hover vào logo header */
+.header .logo h1:hover,
+.header .logo h1:active {
+  /* Giữ hiệu ứng scale và gradient, bỏ text-shadow */
+  transform: scale(1.10);
+  transition: transform 0.18s cubic-bezier(.4, 0, .2, 1);
+  cursor: pointer;
+  text-shadow: none !important;
+}
+
+/* Nếu muốn hiệu ứng gradient text khi hover, giữ lại đoạn này: */
+.header .logo h1:hover,
+.header .logo h1:active {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+/* ...existing code... */
+/* ...existing code... */
+.about .btn.btn-primary.mt-4:hover {
+  background-color: transparent;
+  border-color: var(--accent-color);
+  background-image: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  transition: color 0.3s, background 0.3s, border 0.3s;
+}
+/* ...existing code... */
+.about .about-image img {
+  transition: transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1), box-shadow 0.3s;
+}
+
+.about .about-image:hover img,
+.about .about-image:focus img {
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+  z-index: 2;
+}
+/* ...existing code... */
+.about .feature-item:hover,
+.about .feature-item:focus {
+  background: linear-gradient(135deg, var(--accent-color), #ffb199 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent !important;
+  transition: color 0.3s, background 0.3s;
+}
+.about .feature-item:hover *,
+.about .feature-item:focus * {
+  color: transparent !important;
+  background: none !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+/* ...existing code... */
+/* ...existing code... */
+/* ...existing code... */
