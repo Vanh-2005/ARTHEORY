@@ -330,7 +330,7 @@ function Home() {
                 <section id="services" className="services section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Quy Trình Sáng Tạo</h2>
-                        <div><span>Từ</span> <span className="description-title">Ý tưởng đến nghệ thuật hoàn chỉnh</span></div>
+                        <div><span>Từ</span> <span className="description-title">Ý tưởng đến hiện thực</span></div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
                         <div className="service-header">
@@ -465,7 +465,7 @@ function Home() {
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Các Giai Đoạn Sáng Tạo</h2>
                         <div>
-                            <span className="gradient-text">Hành trình</span> <span className="description-title gradient-text">Tạo nên nghệ thuật số</span>
+                            <span className="gradient-text">Hành trình</span> <span className="description-title gradient-text">Tạo nên</span>
                         </div>
                     </div>
                     <div className="container" data-aos="fade-up" data-aos-delay={100}>
@@ -671,7 +671,7 @@ function Home() {
                 <section id="portfolio" className="portfolio section">
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Tác Phẩm</h2>
-                        <div><span className="gradient-text">Bộ sưu tập</span> <span className="description-title gradient-text">nghệ thuật</span></div>
+                        <div><span className="gradient-text">Bộ sưu tập</span> <span className="description-title gradient-text">tranh số</span></div>
                     </div>
                     <div className="container-fluid" data-aos="fade-up" data-aos-delay={100}>
                         <div className="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
