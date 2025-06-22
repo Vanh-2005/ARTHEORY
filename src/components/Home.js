@@ -270,9 +270,9 @@ function Home() {
                                                     <p>Tái hiện những đô thị tương lai với kiến trúc độc đáo, ánh sáng neon rực rỡ, và không gian số
                                                         sống động, mang đậm phong cách Cyberpunk.</p>
                                                     <div className="concept-tags mt-4">
-                                                        <span className="tag">Cyberpunk</span>
-                                                        <span className="tag">Futuristic Art</span>
-                                                        <span className="tag">Digital Painting</span>
+                                                        <span className="tag">Hư Cấu</span>
+                                                        <span className="tag">Đời Thường</span>
+                                                        <span className="tag">Cảm Xúc</span>
                                                     </div>
                                                 </div>
                                             </div>
