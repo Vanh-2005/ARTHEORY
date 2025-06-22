@@ -1227,8 +1227,8 @@ function Home() {
                                     </div>
                                     <div className="info-content">
                                         <h4>Email</h4>
-                                        <p>info@digitalartviet.com</p>
-                                        <p>support@digitalartviet.com</p>
+                                        <p>ARTHERY@gmail.com</p>
+                                        <p>support@digitalart.com</p>
                                     </div>
                                 </div>
                             </div>

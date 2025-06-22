@@ -4495,3 +4495,15 @@ body.mobile-nav-active {
 /* ...existing code... */
 /* ...existing code... */
 /* ...code bedug... */
+/* Hiệu ứng phóng to nút "Tìm hiểu thêm" khi hover */
+.service-btn {
+  transition: transform 0.25s cubic-bezier(0.4,0.2,0.2,1), box-shadow 0.2s;
+  will-change: transform;
+}
+
+.service-btn:hover,
+.service-btn:focus {
+  transform: scale(1.08);
+  box-shadow: 0 4px 18px 0 rgba(0,0,0,0.13);
+  z-index: 2;
+}
