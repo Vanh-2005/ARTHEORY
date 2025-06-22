@@ -285,9 +285,9 @@ function Home() {
                                                     <p>Khám phá sự giao thoa giữa con người và trí tuệ nhân tạo qua các thiết kế nhân vật robot tinh
                                                         xảo và không gian số hiện đại.</p>
                                                     <div className="concept-tags mt-4">
-                                                        <span className="tag">AI Art</span>
-                                                        <span className="tag">Cybernetic Design</span>
-                                                        <span className="tag">Tech Aesthetic</span>
+                                                        <span className="tag">Chân Dung</span>
+                                                        <span className="tag">Thiên Nhiên</span>
+                                                        <span className="tag">Trừu Tượng</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -300,9 +300,9 @@ function Home() {
                                                     <p>Chinh phục không gian với các tác phẩm số khắc họa hành tinh lạ, trạm không gian, và những nền
                                                         văn minh ngoài hành tinh đầy mê hoặc.</p>
                                                     <div className="concept-tags mt-4">
-                                                        <span className="tag">Space Art</span>
-                                                        <span className="tag">Cosmic Design</span>
-                                                        <span className="tag">Sci-Fi Illustration</span>
+                                                        <span className="tag">Vũ Trụ</span>
+                                                        <span className="tag">Hiện Đại</span>
+                                                        <span className="tag">Tĩnh Vật</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -315,8 +315,8 @@ function Home() {
                                                     <p>Hòa mình vào không gian số, nơi thực tại và ảo ảnh hòa quyện, được thể hiện qua các tác phẩm
                                                         nghệ thuật kỹ thuật số đầy sáng tạo.</p>
                                                     <div className="concept-tags mt-4">
-                                                        <span className="tag">Metaverse Art</span>
-                                                        <span className="tag">Virtual Reality</span>
+                                                        <span className="tag">Siêu Thực</span>
+                                                        <span className="tag">Thần Thoại</span>
                                                     </div>
                                                 </div>
                                             </div>
