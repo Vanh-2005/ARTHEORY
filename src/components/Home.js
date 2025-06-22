@@ -347,7 +347,7 @@ function Home() {
                                     <div className="service-summary">
                                         <p>Chúng tôi cung cấp quy trình sáng tạo chuyên nghiệp, từ ý tưởng ban đầu đến tác phẩm nghệ thuật số
                                             hoàn chỉnh, đảm bảo đáp ứng mọi yêu cầu của khách hàng.</p>
-                                        <a href="services.html" className="service-btn">
+                                        <a href="#pricing" className="service-btn">
                                             Tìm hiểu thêm
                                             <i className="bi bi-arrow-right" />
                                         </a>

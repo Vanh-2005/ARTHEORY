@@ -16,7 +16,7 @@ function Header() {
     };
 
     // Sửa lại hàm handleLinkClick
-       const handleLinkClick = (e, target) => {
+    const handleLinkClick = (e, target) => {
         e.preventDefault();
         if (target) {
             const element = document.querySelector(target);
@@ -26,14 +26,14 @@ function Header() {
                 const elementRect = element.getBoundingClientRect().top;
                 const elementPosition = elementRect - bodyRect;
                 const offsetPosition = elementPosition - offset;
-    
+
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
             }
         }
-        
+
         // Close mobile menu
         setIsMobileMenuOpen(false);
         document.body.style.overflow = 'auto';
@@ -182,20 +182,52 @@ function Header() {
                                             onClick={(e) => toggleDropdown(e, 'sub')}
                                             className={activeDropdown === 'sub' ? 'dropdown-active' : ''}
                                         >
-                                            <span>Danh mục phụ</span>
+                                            <span>Công Cụ Sáng Tạo</span>
                                             <i className={`bi bi-chevron-down ${activeDropdown === 'sub' ? 'active' : ''}`} />
                                         </a>
                                         <ul className={activeDropdown === 'sub' ? 'dropdown-active' : ''}>
-                                            <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Phong cách Anime</a></li>
-                                            <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Concept Art</a></li>
-                                            <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Digital Painting</a></li>
-                                            <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Character Design</a></li>
-                                            <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Matte Painting</a></li>
+                                            <li>
+                                                <a href="https://www.adobe.com/products/photoshop.html" target="_blank" rel="noopener noreferrer">
+                                                    Photoshop
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.adobe.com/products/illustrator.html" target="_blank" rel="noopener noreferrer">
+                                                    Illustrator
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://procreate.art/" target="_blank" rel="noopener noreferrer">
+                                                    Procreate
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.painterartist.com/" target="_blank" rel="noopener noreferrer">
+                                                    Paintcorel
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="https://www.adobe.com/products/fresco.html" target="_blank" rel="noopener noreferrer">
+                                                    AdobeFresco
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
-                                    <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Blog nghệ thuật</a></li>
-                                    <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Câu chuyện nghệ sĩ</a></li>
-                                    <li><a href="#" onClick={(e) => handleLinkClick(e, null)}>Cộng đồng sáng tạo</a></li>
+                                    <li>
+                                        <a href="https://www.artstation.com/wlop" target="_blank" rel="noopener noreferrer">
+                                            Nghệ Sĩ Nổi Bật
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.creativebloq.com/inspiration/the-incredible-story-of-wlop" target="_blank" rel="noopener noreferrer">
+                                            Câu Chuyện Nghệ Sĩ
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.deviantart.com/" target="_blank" rel="noopener noreferrer">
+                                            Cộng Đồng Sáng Tạo
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li><a href="#contact" onClick={(e) => handleLinkClick(e, '#contact')} className={activeSection === 'contact' ? 'active' : ''}>Liên hệ</a></li>
