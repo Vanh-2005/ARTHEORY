@@ -203,7 +203,7 @@ function Home() {
                     <div className="container section-title" data-aos="fade-up">
                         <h2>Giới thiệu</h2>
                         <div>
-                            <span className="gradient-text">Lời</span> <span className="description-title gradient-text">Mở Đầu</span>
+                            <span className="gradient-text">Nơi Bắt Đầu</span> <span className="description-title gradient-text">Nghệ Thuật</span>
                         </div>
                     </div>
                     <div className="container">
