@@ -38,13 +38,7 @@ function MusicPlayer() {
         };
     }, []);
 
-    useEffect(() => {
-        if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-            setIsPlaying(false);
-        }
-    }, []);
+
 
     const togglePlayPause = () => {
         const audio = audioRef.current;

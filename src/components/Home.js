@@ -1320,13 +1320,6 @@ useEffect(() => {
                 </section>
             </main>
                  <MusicPlayer />
-                <audio
-                ref={audioRef}
-                src="assets/audio/bring-it-on.mp3"
-                autoPlay
-                loop
-                style={{ display: "none" }}
-            />
             {/* Nút cuộn lên đầu trang */}
             <button
                 className="scroll-top"
