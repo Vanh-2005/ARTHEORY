@@ -1,0 +1,405 @@
+/* Sidebar glassmorphism */
+.music-player-sidebar.apple-style {
+    position: fixed;
+    top: 56px; /* chỉnh theo chiều cao header của bạn, ví dụ 56px */
+    left: -240px;
+    width: 240px;
+    height: 340px;
+    background: rgba(34, 34, 38, 0.55);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    color: #fff;
+    transition: left 0.35s cubic-bezier(.77,0,.18,1), top 0.3s;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 14px 14px 14px;
+    box-sizing: border-box;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+    box-shadow: 8px 0 24px 0 rgba(0,0,0,0.16);
+    border-left: 1px solid rgba(255,255,255,0.08);
+    border-right: 1px solid rgba(255,255,255,0.10);
+    font-family: 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+}
+.music-player-sidebar.apple-style.open {
+    left: 0;
+}
+
+/* Nút mở/đóng sidebar */
+.sidebar-toggle.big {
+    position: absolute;
+    right: -38px;
+    top: 18px;
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, #e43c5c 0%, #ffb199 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+    transition: background 0.2s;
+    border: none;
+    backdrop-filter: blur(6px);
+    z-index: 1100;
+}
+.sidebar-toggle.big:hover {
+    background: linear-gradient(135deg, #ffb199 0%, #e43c5c 100%);
+    box-shadow: 0 4px 16px #e43c5c44;
+}
+.sidebar-toggle.big,
+.music-player-sidebar.apple-style .sidebar-toggle.big {
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+    max-width: 52px !important;
+    max-height: 52px !important;
+    font-size: 1.7rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #e43c5c 0%, #ffb199 100%);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    border: none;
+    cursor: pointer;
+    z-index: 1400;
+    transition: background 0.2s, box-shadow 0.2s;
+    padding: 0;
+}
+.sidebar-toggle.big i {
+    font-size: 1.7rem !important;
+    color: #fff;
+}
+
+/* Nút mở sidebar khi sidebar đóng (nổi ngoài sidebar) */
+.sidebar-toggle.big {
+    position: fixed;
+    left: 16px;
+    bottom: 24px;
+    top: unset;
+    right: unset;
+    border-radius: 50%;
+}
+.music-player-sidebar.apple-style.open ~ .sidebar-toggle.big {
+    display: none !important;
+}
+
+/* Player content */
+.player-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+/* Album art */
+.album-art {
+    width: 88px;
+    height: 88px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    margin-bottom: 6px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.10);
+}
+.album-art img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+.album-art .playing-indicator {
+    display: none;
+}
+
+/* Song info */
+.song-info {
+    text-align: center;
+}
+.song-info h4.gradient-text {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #e43c5c 0%, #ffb199 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+}
+.song-info p {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    opacity: 0.85;
+}
+
+/* Progress bar */
+.progress-bar-container {
+    width: 92%;
+    margin: 0 auto;
+    cursor: pointer;
+    user-select: none;
+}
+.progress-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.13);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+.progress-bar-fg {
+    height: 100%;
+    background: linear-gradient(90deg, #ff7e5f 0%, #feb47b 100%);
+    border-radius: 2px;
+    transition: width 0.2s;
+}
+.progress-time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: #eee;
+    opacity: 0.7;
+    margin-top: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.play-btn,
+.skip-btn {
+    background: linear-gradient(135deg, #e43c5c 0%, #ffb199 100%);
+    border: none;
+    color: #fff;
+    font-size: 1.05rem;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    box-shadow: 0 1px 4px #0002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s, border 0.2s;
+    outline: none;
+    backdrop-filter: blur(2px);
+    margin: 0 2px;
+    padding: 0;
+}
+.play-btn:hover,
+.skip-btn:hover {
+    background: linear-gradient(135deg, #ffb199 0%, #e43c5c 100%);
+    box-shadow: 0 2px 8px #e43c5c44;
+    transform: scale(1.08);
+}
+.play-btn:active,
+.skip-btn:active {
+    transform: scale(0.95);
+}
+.play-btn i,
+.skip-btn i {
+    text-shadow: none;
+    font-size: 1.05rem;
+}
+
+/* Tooltip */
+.sidebar-toggle[title]:hover::after,
+.play-btn[title]:hover::after,
+.skip-btn[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    left: 110%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(34,34,38,0.85);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px #0004;
+    z-index: 9999;
+    opacity: 0.95;
+    pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Responsive: Mobile tối ưu, sidebar nằm dọc, không gây thanh kéo ngang */
+@media (max-width: 600px) {
+  /* Ẩn player khi chưa mở, chỉ hiện icon */
+  .music-player-sidebar.apple-style {
+    display: none !important;
+  }
+  .music-player-sidebar.apple-style.open {
+    display: flex !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: unset;         /* Xóa hoặc unset thuộc tính top */
+    bottom: 100px;          /* Player nằm sát chân trang */
+    width: 100vw;
+    height: 68px;       /* Mini player chiều cao nhỏ */
+    background: rgba(34, 34, 38, 0.85);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -4px 24px 0 rgba(0,0,0,0.18);
+    z-index: 1200;
+    align-items: center;
+    flex-direction: row;
+    padding: 0 10px;
+    overflow: visible;
+    transition: height 0.3s cubic-bezier(.77,0,.18,1);
+  }
+  .music-player-sidebar.apple-style.open .player-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+  .music-player-sidebar.apple-style.open .album-art {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin: 0 10px 0 0;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .music-player-sidebar.apple-style.open .song-info {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: left;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .music-player-sidebar.apple-style.open .song-info h4.gradient-text {
+    font-size: 0.98rem;
+    max-width: 60vw;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .music-player-sidebar.apple-style.open .song-info p {
+    font-size: 0.78rem;
+    margin: 0;
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .music-player-sidebar.apple-style.open .progress-bar-container,
+  .music-player-sidebar.apple-style.open .progress-time {
+    display: none !important; /* Ẩn progress bar khi mini */
+  }
+  .music-player-sidebar.apple-style.open .controls {
+    gap: 8px;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .music-player-sidebar.apple-style.open .play-btn,
+  .music-player-sidebar.apple-style.open .skip-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.18rem;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 50%;
+    margin: 0 2px;
+    padding: 0;
+  }
+  .music-player-sidebar.apple-style .sidebar-toggle.big {
+    display: none !important; /* Ẩn nút đóng khi mini */
+  }
+  @media (max-width: 600px) {
+  .music-player-sidebar.apple-style:not(.open) .sidebar-toggle.big {
+    display: none !important;
+  }
+}
+}
+
+.music-player-sidebar.apple-style .sidebar-toggle.big {
+    position: absolute !important;
+    right: 12px;
+    top: 12px;
+    left: unset;
+    bottom: unset;
+    z-index: 1400;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    font-size: 1.1rem !important;
+    border-radius: 50% !important;
+    padding: 0;
+}
+.music-player-sidebar.apple-style .sidebar-toggle.big i {
+    font-size: 1.1rem !important;
+}
+.sidebar-toggle.big:active {
+    transform: scale(1.18) translateY(-10px) rotate(-8deg);
+    background: linear-gradient(120deg, #ffb199 0%, #e43c5c 100%);
+    box-shadow:
+        0 0 0 8px rgba(255, 177, 153, 0.18),
+        0 12px 36px 0 rgba(228, 60, 92, 0.38),
+        0 4px 16px 0 rgba(0,0,0,0.18);
+    filter: drop-shadow(0 0 16px #ffb199cc);
+    outline: 0;
+    border: none;
+    transition:
+        transform 0.13s cubic-bezier(.4,0,.2,1),
+        background 0.18s cubic-bezier(.4,0,.2,1),
+        box-shadow 0.13s cubic-bezier(.4,0,.2,1),
+        filter 0.13s cubic-bezier(.4,0,.2,1);
+}
+
+/* Overlay */
+@media (max-width: 600px) {
+  .music-player-overlay {
+    position: fixed;
+    z-index: 1199;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(34,34,38,0.28);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    transition: opacity 0.2s;
+  }
+}

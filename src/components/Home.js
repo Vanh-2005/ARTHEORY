@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-
+import React, { useEffect, useRef } from "react";
+import MusicPlayer from './MusicPlayer';
 function Home() {
+        const audioRef = useRef(null);
     useEffect(() => {
         // --- Swiper, Isotope, các khởi tạo khác ---
         if (typeof window !== 'undefined') {
@@ -146,7 +147,13 @@ function Home() {
             // ...cleanup isotope, swiper nếu cần...
         };
     }, []);
-
+useEffect(() => {
+    // ...existing code...
+    if (audioRef.current) {
+        audioRef.current.volume = 0.5; // chỉnh âm lượng nếu muốn
+        audioRef.current.play().catch(() => {});
+    }
+}, []);
     // Empty dependency array means this runs once on mount
     return (
         <>
@@ -1312,6 +1319,14 @@ function Home() {
                     </div>
                 </section>
             </main>
+                 <MusicPlayer />
+                <audio
+                ref={audioRef}
+                src="assets/audio/bring-it-on.mp3"
+                autoPlay
+                loop
+                style={{ display: "none" }}
+            />
             {/* Nút cuộn lên đầu trang */}
             <button
                 className="scroll-top"
