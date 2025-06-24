@@ -1,14 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ARTHEORY",
+  "name": "ARTHEORY - Digital Art Gallery",
+  "description": "ARTHEORY - Studio nghệ thuật kỹ thuật số hàng đầu tại Việt Nam.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
+      "src": "/logoapp/apple.png",
       "type": "image/png",
       "sizes": "192x192"
     },
@@ -18,8 +14,24 @@
       "sizes": "512x512"
     }
   ],
+   "screenshots": [
+    {
+      "src": "03-03-p.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "03-03.png",
+      "sizes": "2912x1632",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#e43c5c",
+  "background_color": "#ffffff",
+  "orientation": "portrait"
 }

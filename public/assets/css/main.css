@@ -4507,3 +4507,113 @@ body.mobile-nav-active {
   box-shadow: 0 4px 18px 0 rgba(0,0,0,0.13);
   z-index: 2;
 }
+
+/* Liquid Welcome Popup - Minimal Glassmorphism */
+/* Liquid Welcome Popup - Minimal Glassmorphism */
+.liquid-welcome {
+  position: fixed;
+  z-index: 2000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(34,34,38,0.10);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  animation: fadeIn 0.5s cubic-bezier(.4,0,.2,1);
+}
+
+.liquid-bg {
+  display: none;
+}
+
+.liquid-content {
+  position: relative;
+  z-index: 1;
+  padding: 36px 28px 24px 28px;
+  border-radius: 32px; /* Bo đều 4 góc, tròn đẹp */
+  background: rgba(255,255,255,0.18);
+  box-shadow: 0 4px 32px 0 rgba(34,34,38,0.10);
+  text-align: center;
+  min-width: 260px;
+  max-width: 92vw;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  animation: popIn 0.5s cubic-bezier(.4,0,.2,1);
+  transition: background 0.3s;
+  box-sizing: border-box;
+}
+
+.liquid-content h2 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #e43c5c;
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+.liquid-content p {
+  font-size: 1.01rem;
+  margin-bottom: 18px;
+  color: #222;
+  opacity: 0.82;
+  font-weight: 400;
+}
+
+.liquid-btn {
+  padding: 10px 28px;
+  border-radius: 20px;
+  border: none;
+  background: rgba(255,255,255,0.22);
+  color: #e43c5c;
+  font-weight: 600;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px #e43c5c11;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.13s, color 0.15s;
+  border: 1.2px solid #e43c5c22;
+  backdrop-filter: blur(2px);
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  display: block;
+}
+.liquid-btn:hover {
+  background: #e43c5c;
+  color: #fff;
+  transform: scale(1.04);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes popIn {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .liquid-content {
+    min-width: 0;
+    max-width: 98vw;
+    padding: 16px 6vw 12px 6vw;
+    border-radius: 18px !important; /* Bo đều 4 góc trên mobile */
+  }
+  .liquid-content h2 {
+    font-size: 1.08rem;
+  }
+  .liquid-content p {
+    font-size: 0.97rem;
+    margin-bottom: 14px;
+  }
+  .liquid-btn {
+    font-size: 0.98rem;
+    padding: 10px 0;
+    max-width: 100%;
+  }
+}

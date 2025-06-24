@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MusicPlayer from './MusicPlayer';
 function Home() {
-        const audioRef = useRef(null);
+    const [showWelcome, setShowWelcome] = useState(true); // Luôn hiện khi reload trang
+    // ...existing code...
+    const audioRef = useRef(null);
     useEffect(() => {
         // --- Swiper, Isotope, các khởi tạo khác ---
         if (typeof window !== 'undefined') {
@@ -147,13 +149,13 @@ function Home() {
             // ...cleanup isotope, swiper nếu cần...
         };
     }, []);
-useEffect(() => {
-    // ...existing code...
-    if (audioRef.current) {
-        audioRef.current.volume = 0.5; // chỉnh âm lượng nếu muốn
-        audioRef.current.play().catch(() => {});
-    }
-}, []);
+    useEffect(() => {
+        // ...existing code...
+        if (audioRef.current) {
+            audioRef.current.volume = 0.5; // chỉnh âm lượng nếu muốn
+            audioRef.current.play().catch(() => { });
+        }
+    }, []);
     // Empty dependency array means this runs once on mount
     return (
         <>
@@ -1318,8 +1320,23 @@ useEffect(() => {
                         </div>
                     </div>
                 </section>
+
+                {showWelcome && (
+                    <div className="liquid-welcome">
+                        <div className="liquid-bg"></div>
+                        <div className="liquid-content">
+                            <h2>Chào mừng đến với <span className="gradient-text">ARTHEORY</span>!</h2>
+                            <p>Khám phá thế giới nghệ thuật số hiện đại, sáng tạo không giới hạn.</p>
+                            <button className="liquid-btn" onClick={() => setShowWelcome(false)}>
+                                Bắt đầu trải nghiệm
+                            </button>
+                        </div>
+                    </div>
+                )}
+
             </main>
-                 <MusicPlayer />
+
+            <MusicPlayer />
             {/* Nút cuộn lên đầu trang */}
             <button
                 className="scroll-top"
