@@ -4617,3 +4617,14 @@ body.mobile-nav-active {
     max-width: 100%;
   }
 }
+/* Hiệu ứng zoom nhẹ khi hover vào ảnh showcase */
+.featured-img-wrapper .featured-img {
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.25s;
+  will-change: transform;
+}
+
+.featured-img-wrapper:hover .featured-img {
+  transform: scale(1.07);
+  box-shadow: 0 8px 32px 0 rgba(34,34,38,0.13);
+  z-index: 2;
+}

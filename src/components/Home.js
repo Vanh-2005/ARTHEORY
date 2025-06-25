@@ -605,8 +605,8 @@ function Home() {
                                                     tiết tinh xảo.</p>
                                                 <div className="artwork-info d-flex align-items-center">
                                                     <div className="info-content">
-                                                        <span className="technique">Digital Painting</span>
-                                                        <span className="resolution">4K Resolution</span>
+                                                        <span className="technique">Kỹ Thuật Số</span>
+                                                        <span className="resolution">4K</span>
                                                         <span className="software">Photoshop CC</span>
                                                     </div>
                                                 </div>
@@ -630,8 +630,8 @@ function Home() {
                                                     trúc tương lai.</p>
                                                 <div className="artwork-info d-flex align-items-center">
                                                     <div className="info-content">
-                                                        <span className="technique">Concept Art</span>
-                                                        <span className="resolution">8K Resolution</span>
+                                                        <span className="technique">Viễn Tưởng</span>
+                                                        <span className="resolution">8K</span>
                                                         <span className="software">Procreate + Photoshop</span>
                                                     </div>
                                                 </div>
@@ -655,8 +655,8 @@ function Home() {
                                                     thực.</p>
                                                 <div className="artwork-info d-flex align-items-center">
                                                     <div className="info-content">
-                                                        <span className="technique">Character Design</span>
-                                                        <span className="resolution">4K Resolution</span>
+                                                        <span className="technique">Thần Thoại</span>
+                                                        <span className="resolution">4K</span>
                                                         <span className="software">Clip Studio Paint</span>
                                                     </div>
                                                 </div>
