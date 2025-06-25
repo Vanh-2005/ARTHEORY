@@ -565,7 +565,9 @@ function Home() {
                                 </div>
                             </div>
                             <div className="content-right position-relative" data-aos="fade-left" data-aos-delay={300}>
-                                <img src="assets/img/misc/WLOP7.jpg" alt="Nghệ thuật số sáng tạo" className="img-fluid rounded-4" />
+                                <div className="featured-img-wrapper">
+                                    <img src="assets/img/misc/WLOP7.jpg" alt="Nghệ thuật số sáng tạo" className="img-fluid rounded-4 featured-img" />
+                                </div>
                                 <div className="floating-card">
                                     <div className="card-icon">
                                         <i className="bi bi-award" />

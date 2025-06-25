@@ -1,9 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 
 import './MusicPlayer.css';
 
 function formatTime(sec) {
-    if (isNaN(sec)) return '0:00';
+    if (isNaN(sec) || sec === Infinity) return '0:00';
     const m = Math.floor(sec / 60);
     const s = Math.floor(sec % 60);
     return `${m}:${s < 10 ? '0' : ''}${s}`;
@@ -16,9 +16,7 @@ function MusicPlayer() {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [isSeeking, setIsSeeking] = useState(false);
-    const [seekingTime, setSeekingTime] = useState(0); // <-- Thêm dòng này
-
-    // Thêm ref cho progress bar
+    const [seekingTime, setSeekingTime] = useState(0);
     const progressBarRef = useRef(null);
 
     useEffect(() => {
@@ -26,19 +24,28 @@ function MusicPlayer() {
         if (!audio) return;
         audio.volume = 0.5;
 
-        const updateTime = () => setCurrentTime(audio.currentTime);
-        const setAudioDuration = () => setDuration(audio.duration);
+        const updateTime = () => {
+            if (!isSeeking) setCurrentTime(audio.currentTime);
+        };
+        const setAudioDuration = () => {
+            if (!isNaN(audio.duration) && audio.duration > 0) {
+                setDuration(audio.duration);
+            }
+        };
 
         audio.addEventListener('timeupdate', updateTime);
         audio.addEventListener('loadedmetadata', setAudioDuration);
+        audio.addEventListener('durationchange', setAudioDuration);
+
+        // Gọi luôn khi component mount (trường hợp audio đã sẵn sàng)
+        setAudioDuration();
 
         return () => {
             audio.removeEventListener('timeupdate', updateTime);
             audio.removeEventListener('loadedmetadata', setAudioDuration);
+            audio.removeEventListener('durationchange', setAudioDuration);
         };
-    }, []);
-
-
+    }, [isSeeking]);
 
     const togglePlayPause = () => {
         const audio = audioRef.current;
@@ -54,7 +61,6 @@ function MusicPlayer() {
     const toggleSidebar = () => {
         if (!isSidebarOpen) {
             setIsSidebarOpen(true);
-            // Chỉ play nếu chưa từng play
             if (audioRef.current && audioRef.current.paused) {
                 audioRef.current.play().then(() => {
                     setIsPlaying(true);
@@ -62,17 +68,49 @@ function MusicPlayer() {
             }
         } else {
             setIsSidebarOpen(false);
-            // KHÔNG pause audio, nhạc vẫn chạy
         }
     };
 
-    const handleProgressClick = (e) => {
-        const bar = e.target;
+    // Seek logic
+    const getSeekTime = (e) => {
+        const bar = progressBarRef.current;
+        if (!bar) return 0;
         const rect = bar.getBoundingClientRect();
-        const percent = (e.clientX - rect.left) / rect.width;
-        const seekTime = percent * duration;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        let percent = (clientX - rect.left) / rect.width;
+        percent = Math.max(0, Math.min(1, percent));
+        return percent * duration;
+    };
+
+    const handleProgressClick = (e) => {
+        const seekTime = getSeekTime(e);
         audioRef.current.currentTime = seekTime;
         setCurrentTime(seekTime);
+    };
+
+    const seek = useCallback((e) => {
+        e.preventDefault();
+        const seekTime = getSeekTime(e);
+        setSeekingTime(seekTime);
+    }, [duration]);
+
+    const stopSeek = useCallback(() => {
+        setIsSeeking(false);
+        audioRef.current.currentTime = seekingTime;
+        setCurrentTime(seekingTime);
+        window.removeEventListener('mousemove', seek);
+        window.removeEventListener('mouseup', stopSeek);
+        window.removeEventListener('touchmove', seek);
+        window.removeEventListener('touchend', stopSeek);
+    }, [seekingTime, seek]);
+
+    const startSeek = (e) => {
+        setIsSeeking(true);
+        seek(e);
+        window.addEventListener('mousemove', seek);
+        window.addEventListener('mouseup', stopSeek);
+        window.addEventListener('touchmove', seek, { passive: false });
+        window.addEventListener('touchend', stopSeek);
     };
 
     const skipBackward = () => {
@@ -85,52 +123,6 @@ function MusicPlayer() {
         if (audioRef.current) {
             audioRef.current.currentTime = Math.min(duration, audioRef.current.currentTime + 5);
         }
-    };
-
-    // Hàm xử lý khi bắt đầu kéo
-    const startSeek = (e) => {
-        setIsSeeking(true);
-        seek(e);
-        window.addEventListener('mousemove', seek);
-        window.addEventListener('mouseup', stopSeek);
-        window.addEventListener('touchmove', seek, { passive: false });
-        window.addEventListener('touchend', stopSeek);
-    };
-
-    // Hàm xử lý khi kéo/thả
-    const seek = (e) => {
-        let clientX;
-        if (e.touches) {
-            clientX = e.touches[0].clientX;
-        } else {
-            clientX = e.clientX;
-        }
-        const bar = progressBarRef.current;
-        if (!bar) return;
-        const rect = bar.getBoundingClientRect();
-        let percent = (clientX - rect.left) / rect.width;
-        percent = Math.max(0, Math.min(1, percent));
-        const seekTime = percent * duration;
-        setSeekingTime(seekTime);
-        if (isSeeking) {
-            // Chỉ cập nhật giao diện, chưa tua nhạc
-        } else {
-            audioRef.current.currentTime = seekTime;
-            setCurrentTime(seekTime);
-        }
-    };
-
-    // Hàm kết thúc kéo
-    const stopSeek = () => {
-        setIsSeeking(false);
-        if (typeof seekingTime === 'number' && !isNaN(seekingTime)) {
-            audioRef.current.currentTime = seekingTime;
-            setCurrentTime(seekingTime);
-        }
-        window.removeEventListener('mousemove', seek);
-        window.removeEventListener('mouseup', stopSeek);
-        window.removeEventListener('touchmove', seek);
-        window.removeEventListener('touchend', stopSeek);
     };
 
     return (
@@ -173,33 +165,28 @@ function MusicPlayer() {
                         <p>P. Diddy ft. Biggie</p>
                     </div>
                     <div
-    className="progress-bar-container"
-    ref={progressBarRef}
-    onMouseDown={e => {
-        setIsSeeking(true);
-        seek(e);
-        window.addEventListener('mousemove', seek);
-        window.addEventListener('mouseup', stopSeek);
-    }}
-    onTouchStart={e => {
-        setIsSeeking(true);
-        seek(e);
-        window.addEventListener('touchmove', seek, { passive: false });
-        window.addEventListener('touchend', stopSeek);
-    }}
-    style={{ cursor: 'pointer' }}
->
-    <div className="progress-bar-bg">
-        <div
-            className="progress-bar-fg"
-            style={{ width: duration ? `${(currentTime / duration) * 100}%` : '0%' }}
-        ></div>
-    </div>
-    <div className="progress-time">
-        <span>{formatTime(isSeeking ? seekingTime : currentTime)}</span>
-        <span>{formatTime(duration)}</span>
-    </div>
-</div>
+                        className="progress-bar-container"
+                        ref={progressBarRef}
+                        onClick={handleProgressClick}
+                        onMouseDown={startSeek}
+                        onTouchStart={startSeek}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <div className="progress-bar-bg">
+                            <div
+                                className="progress-bar-fg"
+                                style={{
+                                    width: duration
+                                        ? `${((isSeeking ? seekingTime : currentTime) / duration) * 100}%`
+                                        : '0%',
+                                }}
+                            ></div>
+                        </div>
+                        <div className="progress-time">
+                            <span>{formatTime(isSeeking ? seekingTime : currentTime)}</span>
+                            <span>{formatTime(duration)}</span>
+                        </div>
+                    </div>
                     <div className="controls">
                         <button className="skip-btn" onClick={skipBackward}>
                             <i className="bi bi-skip-backward-fill"></i>
